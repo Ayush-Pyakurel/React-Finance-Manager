@@ -3,7 +3,7 @@
 function App() {
   return (
     <div className='App'>
-      <h1>Hawa biplav</h1>
+      <h1>Hawa chaba</h1>
     </div>
   );
 }
