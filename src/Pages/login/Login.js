@@ -10,7 +10,6 @@ const Login = () => {
 
   const handleLoginFormSubmit = (e) => {
     e.preventDefault();
-    console.log({ email, password });
   };
 
   return (
@@ -19,9 +18,10 @@ const Login = () => {
       <label>
         <span>Email:</span>
         <input
-          type='text'
+          type='email'
           onChange={(e) => setEmail(e.target.value)}
           value={email}
+          required
         />
       </label>
       <label>
@@ -30,6 +30,7 @@ const Login = () => {
           type='password'
           onChange={(e) => setPassword(e.target.value)}
           value={password}
+          required
         />
       </label>
       <button className='btn'>Login</button>
