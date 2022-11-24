@@ -8,7 +8,7 @@
   text-align: center;
   font-size: 1.5em;
   color: rgb(63, 60, 60);
-  filter: drop-shadow(8px 8px 4px rgb(119, 119, 56));
+  filter: drop-shadow(8px 8px 6px rgb(119, 119, 56));
 }
 
 .signup-form label {
