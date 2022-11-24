@@ -1,0 +1,30 @@
+.navbar {
+  padding: 20px 10px;
+  background: rgb(179, 179, 137);
+  box-sizing: border-box;
+}
+
+.title {
+  font-weight: bold;
+  margin-right: auto;
+  letter-spacing: 1px;
+  font-size: 1.2em;
+  color: rgb(63, 60, 60);
+}
+
+.navbar ul {
+  display: flex;
+  margin: 0 auto;
+  max-width: 1450px;
+  align-items: center;
+}
+
+.navbar button,
+.navbar a {
+  margin-left: 16px;
+}
+
+.navbar a {
+  color: rgb(63, 60, 60);
+  text-decoration: none;
+}
