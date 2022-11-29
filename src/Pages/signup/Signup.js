@@ -9,7 +9,7 @@ const Signup = () => {
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
 
-  //sign
+  //signup form submit
   const handleSignupFormSubmit = (e) => {
     e.preventDefault();
   };
