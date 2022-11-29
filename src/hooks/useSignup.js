@@ -2,10 +2,15 @@
 import { useState } from "react";
 import { projectAuth } from "../Firebase/config";
 
+//import custome hook
+import { useAuthContext } from "./useAuthContext";
+
 //cusotme hook
 export const useSignup = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+
+  const { dispatch } = useAuthContext();
 
   //function to handle signup logic
   const signUp = async (email, password, username) => {
@@ -33,10 +38,11 @@ export const useSignup = () => {
 
     */
       }
-      const displayName = await response.user.updateProfile({
+      await response.user.updateProfile({
         displayName: username,
       });
-      console.log(displayName);
+
+      dispatch({ type: "LOGIN", payload: response.user });
 
       setLoading(() => false);
       setError(() => null);
