@@ -1,5 +1,5 @@
 //import react hooks
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { projectAuth } from "../Firebase/config";
 
 //import custome hook
@@ -7,6 +7,7 @@ import { useAuthContext } from "./useAuthContext";
 
 //cusotme hook
 export const useSignup = () => {
+  const [isCancelled, setIsCancelled] = useState(false);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -43,14 +44,21 @@ export const useSignup = () => {
       });
 
       dispatch({ type: "LOGIN", payload: response.user });
-
-      setLoading(() => false);
-      setError(() => null);
+      if (!isCancelled) {
+        setLoading(() => false);
+        setError(() => null);
+      }
     } catch (err) {
-      setError(err.message);
-      setLoading(() => false);
+      if (!isCancelled) {
+        setError(err.message);
+        setLoading(() => false);
+      }
     }
   };
+
+  useEffect(() => {
+    return () => setIsCancelled(true);
+  }, []);
 
   return { signUp, loading, error };
 };
