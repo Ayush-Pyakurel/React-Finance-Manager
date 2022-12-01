@@ -1,5 +1,6 @@
 //import react hooks
-import { createContext, useReducer } from "react";
+import { createContext, useReducer, useEffect } from "react";
+import { projectAuth } from "../Firebase/config";
 
 export const AuthContext = createContext();
 
@@ -10,6 +11,8 @@ export const AuthReducer = (state, action) => {
       return { ...state, user: action.payload };
     case "LOGOUT":
       return { ...state, user: null };
+    case "AUTH_IS_READY":
+      return { ...state, user: action.payload, authIsReady: true };
     default:
       return state;
   }
@@ -19,7 +22,16 @@ export const AuthReducer = (state, action) => {
 export const AuthContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AuthReducer, {
     user: null,
+    authIsReady: false,
   });
+
+  useEffect(() => {
+    //projectAuth.onAuthStateChanged returns a function; invoking which unsubscribe to the subscriptions
+    const unsubscribe = projectAuth.onAuthStateChanged((user) => {
+      dispatch({ type: "AUTH_IS_READY", payload: user });
+      unsubscribe();
+    });
+  }, []);
 
   return (
     <AuthContext.Provider value={{ ...state, dispatch }}>
